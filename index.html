@@ -336,7 +336,10 @@
         createdAt: new Date().toISOString()
       };
       
-      localStorage.setItem('bonjer_customer_orders', JSON.stringify([...JSON.parse(localStorage.getItem('bonjer_customer_orders') || '[]'), order]));
+      const existingOrders = JSON.parse(localStorage.getItem('bonjer_customer_orders') || '[]');
+      existingOrders.push(order);
+      localStorage.setItem('bonjer_customer_orders', JSON.stringify(existingOrders));
+      console.log('Order saved:', order);
       
       document.getElementById('orderNumber').textContent = order.orderNumber;
       closeModal('cartModal');
